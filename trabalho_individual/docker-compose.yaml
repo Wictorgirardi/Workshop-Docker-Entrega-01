@@ -11,6 +11,4 @@ services:
       - /chat-app/node_modules
     ports:
       - 7001:7001
-    depends_on:
-      - api-gateway
   
