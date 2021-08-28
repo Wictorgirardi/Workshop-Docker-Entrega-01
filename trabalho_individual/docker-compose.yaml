@@ -2,7 +2,8 @@ version: "3.8"
 
 
 services:  
- chat-service:
+# Listando services de acordo com a cadeira de prioridade de dependencia.
+  chat-service:
     build:
       context: ./chat-service
     volumes:
