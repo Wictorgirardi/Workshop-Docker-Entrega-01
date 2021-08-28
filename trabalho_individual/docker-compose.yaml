@@ -1,0 +1,16 @@
+version: "3.8"
+
+
+services:  
+  chat-front-app:
+    build:
+      context: ./chat-app
+    env_file: ./chat-app/.env
+    volumes:
+      - ./chat-app:/chat-app/
+      - /chat-app/node_modules
+    ports:
+      - 7001:7001
+    depends_on:
+      - api-gateway
+  
