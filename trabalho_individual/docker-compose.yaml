@@ -4,6 +4,26 @@ version: "3.8"
 services:  
 # Listando services de acordo com a cadeira de prioridade de dependencia.
 
+  chat-service-db:
+    image: mysql:5.7.20
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: db
+    volumes:
+      - chat-service-data:/var/lib/mysql
+    ports:
+      - 7200:3306
+
+  users-service-db:
+    image: mysql:5.7.20
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: db
+    volumes:
+      - users-service-data:/var/lib/mysql
+    ports:
+      - 7201:3306
+      
   users-service:
     build:
       context: ./users-service
@@ -12,6 +32,8 @@ services:
       - /users-service/node_modules
     ports:
       - 7101:7101
+    depends_on:
+      - users-service-db
 
   chat-service:
     build:
@@ -21,6 +43,8 @@ services:
       - /chat-service/node_modules
     ports:
       - 7100:7100
+    depends_on:
+      - chat-service-db
 
   api-gateway:
     build:
