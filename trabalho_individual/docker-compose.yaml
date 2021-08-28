@@ -25,6 +25,17 @@ services:
       - users-service-data:/var/lib/mysql
     ports:
       - 7201:3306
+
+  phpmyadmin:
+    platform: linux/x86_64
+    image: phpmyadmin/phpmyadmin
+    volumes:
+      - ./phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+    ports:
+      - 7300:80
+    depends_on:
+      - users-service-db
+      - chat-service-db
       
   users-service:
     build:
