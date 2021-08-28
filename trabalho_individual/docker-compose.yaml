@@ -2,6 +2,15 @@ version: "3.8"
 
 
 services:  
+ chat-service:
+    build:
+      context: ./chat-service
+    volumes:
+      - ./chat-service:/chat-service/
+      - /chat-service/node_modules
+    ports:
+      - 7100:7100
+
   api-gateway:
     build:
       context: ./api-gateway
@@ -10,6 +19,8 @@ services:
       - /api-gateway/node_modules
     ports:
       - 7000:7000
+    depends_on:
+      - chat-service
 
   chat-front-app:
     build:
