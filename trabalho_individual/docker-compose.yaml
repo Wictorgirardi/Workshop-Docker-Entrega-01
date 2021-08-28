@@ -3,6 +3,16 @@ version: "3.8"
 
 services:  
 # Listando services de acordo com a cadeira de prioridade de dependencia.
+
+  users-service:
+    build:
+      context: ./users-service
+    volumes:
+      - ./users-service:/users-service/
+      - /users-service/node_modules
+    ports:
+      - 7101:7101
+
   chat-service:
     build:
       context: ./chat-service
@@ -22,6 +32,7 @@ services:
       - 7000:7000
     depends_on:
       - chat-service
+      - users-service
 
   chat-front-app:
     build:
