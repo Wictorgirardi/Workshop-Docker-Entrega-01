@@ -5,4 +5,4 @@ WORKDIR /users-service/
 COPY package.json /users-service/package.json
 RUN yarn 
 EXPOSE 7101
-CMD yarn db:migrate && yarn watch
+CMD ["sh","-c","yarn db:migrate && yarn watch"]
